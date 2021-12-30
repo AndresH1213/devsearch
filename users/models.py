@@ -21,6 +21,17 @@ class Profile(models.Model):
     created = models.DateTimeField(auto_now_add=True)
     id = models.UUIDField(default=uuid.uuid4, unique=True, primary_key=True, editable=False)
 
+    class Meta:
+        ordering = ['-created']
+
+    @property
+    def imageUrl(self):
+        try:
+            url = self.profile_image.url
+        except:
+            url = ''
+        return url
+
     def __str__(self) -> str:
         return str(self.username)
 
