@@ -25,9 +25,9 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = 'django-insecure-xu6#h=%vw1m4*09fsf7nxkj8do47wo!xsline$kkn90%1p4x2$'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 
-ALLOWED_HOSTS = ['*']
+ALLOWED_HOSTS = ['localhost','127.0.0.1', 'devsearchapp.herokuapp.com']
 
 
 # Application definition
@@ -44,7 +44,8 @@ INSTALLED_APPS = [
     'users.apps.UsersConfig',
 
     'rest_framework',
-    'corsheaders'
+    'corsheaders',
+    'storages'
 ]
 
 REST_FRAMEWORK = {
@@ -121,16 +122,16 @@ WSGI_APPLICATION = 'devsearch.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/3.2/ref/settings/#databases
 
-# DATABASES = {
-#     'default': {
-#         'ENGINE': 'django.db.backends.postgresql',
-#         'NAME': 'devsearch',
-#         'USER': 'postgres',
-#         'PASSWORD': '',
-#         'HOST':'localhost',
-#         'PORT':'5432',
-#     }
-# }
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': 'devsearch',
+        'USER': 'andresh',
+        'PASSWORD': 'contrase;a',
+        'HOST':'database-1.cbz9la4m9of1.us-east-2.rds.amazonaws.com',
+        'PORT':'5432',
+    }
+}
 
 # DATABASES = {
 #     'default': {
@@ -138,14 +139,6 @@ WSGI_APPLICATION = 'devsearch.wsgi.application'
 #         'NAME': BASE_DIR / 'db.sqlite3',
 #     }
 # }
-import dj_database_url
-from decouple import config
-
-DATABASES = {
-    'default': dj_database_url.config(
-        default=config('DATABASE_URL')
-    )
-}
 
 # Password validation
 # https://docs.djangoproject.com/en/3.2/ref/settings/#auth-password-validators
@@ -185,8 +178,8 @@ EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 EMAIL_HOST = 'smtp.gmail.com'
 EMAIL_PORT = 587
 EMAIL_USE_TLS = True
-EMAIL_HOST_USER = 'test@testing'
-EMAIL_HOST_PASSWORD = 'passwordtest'
+EMAIL_HOST_USER = 'edanhebla1213@gmail.com'
+EMAIL_HOST_PASSWORD = 'faecpmcfsyqcdufq'
 
 
 # Static files (CSS, JavaScript, Images)
@@ -196,14 +189,25 @@ STATIC_URL = '/static/'
 MEDIA_URL = '/images/'
 
 STATICFILES_DIRS = [
-    os.path.join(BASE_DIR, 'static')
+    BASE_DIR / 'static'
 ]
 
 MEDIA_ROOT = os.path.join(BASE_DIR, 'static/images')
 STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 
-STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
+DEFAULT_FILE_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
+
 # Default primary key field type
 # https://docs.djangoproject.com/en/3.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+AWS_QUERYSTRING_AUTH = False
+AWS_S3_FILE_OVERWRITE = False
+
+AWS_S3_ACCESS_KEY_ID = 'AKIAXDXFXLEMBI7AE3VE'
+AWS_S3_SECRET_ACCESS_KEY  = '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'
+AWS_STORAGE_BUCKET_NAME = 'devsearch-bucket-tut'
+
+if os.getcwd() == '/app':
+    DEBUG = False
