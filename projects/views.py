@@ -18,7 +18,7 @@ def projects(request):
 
 def project(request, pk):
     projectObj = Project.objects.get(id=pk)
-    form = ReviewForm
+    form = ReviewForm()
 
     if request.method == 'POST':
         form = ReviewForm(request.POST)
