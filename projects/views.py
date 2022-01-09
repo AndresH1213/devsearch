@@ -59,14 +59,15 @@ def createProject(request):
 def updateProject(request, pk):
     
     profile = request.user.profile
-    project = profile.project_set.get(id=pk)
+    # project = profile.project_set.get(id=pk)
+    project = Project.objects.get(id=pk)
     form = ProjectForm(instance=project)
 
     if request.method == 'POST':
         newtags = request.POST.get('newtags').replace(',',' ').split()
-        form = ProjectForm(request.POST, request.FILES, instance=project)
+        form = ProjectForm(data=request.POST,files=request.FILES, instance=project)
         if form.is_valid():
-            form.save()
+            salvado = form.save()
             for tag in newtags:
                 tag, created = Tag.objects.get_or_create(name=tag)
                 project.tags.add(tag)

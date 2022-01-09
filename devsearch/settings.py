@@ -22,7 +22,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/3.2/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-xu6#h=%vw1m4*09fsf7nxkj8do47wo!xsline$kkn90%1p4x2$'
+SECRET_KEY = os.environ.get('DEVS_SECRET_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
@@ -125,10 +125,10 @@ WSGI_APPLICATION = 'devsearch.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'devsearch',
-        'USER': 'andresh',
-        'PASSWORD': 'contrase;a',
-        'HOST':'database-1.cbz9la4m9of1.us-east-2.rds.amazonaws.com',
+        'NAME': os.environ.get('PSDBAWS_NAME'),
+        'USER': os.environ.get('PSDBAWS_USER'),
+        'PASSWORD': os.environ.get('PSDBAWS_PASSWORD'),
+        'HOST': os.environ.get('PSDBAWS_HOST'),
         'PORT':'5432',
     }
 }
@@ -178,8 +178,8 @@ EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 EMAIL_HOST = 'smtp.gmail.com'
 EMAIL_PORT = 587
 EMAIL_USE_TLS = True
-EMAIL_HOST_USER = 'edanhebla1213@gmail.com'
-EMAIL_HOST_PASSWORD = 'faecpmcfsyqcdufq'
+EMAIL_HOST_USER = os.environ.get('DEVS_EMAIL_HOST')
+EMAIL_HOST_PASSWORD = os.environ.get('DEVS_EMAIL_PASSWORD')
 
 
 # Static files (CSS, JavaScript, Images)
@@ -205,8 +205,8 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 AWS_QUERYSTRING_AUTH = False
 AWS_S3_FILE_OVERWRITE = False
 
-AWS_ACCESS_KEY_ID = 'AKIAXDXFXLEMBI7AE3VE'
-AWS_SECRET_ACCESS_KEY  = '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'
+AWS_ACCESS_KEY_ID = os.environ.get('DEVS_AWS_ACCESS_KEY_ID')
+AWS_SECRET_ACCESS_KEY  = os.environ.get('DEVS_AWS_SECRET_ACCESS_KEY')
 AWS_STORAGE_BUCKET_NAME = 'devsearch-bucket-tut'
 
 if os.getcwd() == '/app':
