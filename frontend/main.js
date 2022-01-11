@@ -11,10 +11,10 @@ if (token) {
 logoutBtn.addEventListener('click', (e) => {
     e.preventDefault()
     localStorage.removeItem('token')
-    window.location = 'file:///C:/Users/57318/Desktop/Django/DjangoProyect-Udemy/Django-2021-Start/frontend/login.html'
+    window.location = 'https://devsearchapp.herokuapp.com/login/'
 })
 
-let projectsUrl = 'http://127.0.0.1:8000/api/projects/'
+let projectsUrl = 'https://devsearchapp.herokuapp.com/api/projects/'
 
 let getProjects = () => {
     fetch(projectsUrl)
@@ -31,7 +31,7 @@ let buildProjects = (projects) => {
         let project = projects[i]
         let projectCard = `
             <div class="project--card">
-                <img src="http://127.0.0.1:8000${project.featured_image}" />
+                <img src="https://devsearchapp.herokuapp.com/${project.featured_image}" />
                 
                 <div>
                     <div class="card--header">
